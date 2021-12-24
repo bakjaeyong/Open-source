@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+    <style>
+        h2 {
+            margin: 0px;
+        }
+        .box {
+            border: 1px solid gray;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+        span {
+            padding: 3px;
+            margin: 3px;
+        }
+    </style>
+    <script>
+        function move(){
+            let parent = this.parentNode.getAttribute("id");
+            if(parent == "ToDo"){
+               document.getElementById("Done").appendChild(this);
+            }
+            else{
+               document.getElementById("ToDo").appendChild(this);
+            }
+        }
+        function del (){
+          this.parentNode.remove();
+        }
+        function keydownHandler(){
+         if(event.keyCode == 13){
+              let div = document.getElementById("ToDo");
+              let span = document.createElement("span");
+              let button = document.createElement("button");
+              button.innerHTML = "X";
+              span.innerHTML = this.value;
+              div.appendChild(span);
+              span.appendChild(button);
+              console.log(button);
+              $(button).click(del);
+              $(span).click(move);
+         }
+        }
+        $(document).ready(function(){
+          $("#input").keydown(keydownHandler);
+          console.log(document.querySelector("h1"))
+        })
+    </script>
+</head>
+<body>
+    <h1>ToDoList</h1>
+    <input type="text" id="input">
+    <hr>
+    <h2>ToDo</h2>
+     <div id="ToDo" class="box">
+
+     </div>
+     <hr>
+     <h2>Done</h2>
+     <div id="Done" class="box">
+
+     </div>
+</body>
+</html>
